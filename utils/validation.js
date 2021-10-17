@@ -70,7 +70,7 @@ const updateSpaceValidation = (data) => {
 }
 
 // Join Space Validation
-const joinSpaceValidation = (data) => {
+const spaceValidation = (data) => {
     const schema = Joi.object({
         spaceCode: Joi.string()
             .length(8)
@@ -85,5 +85,5 @@ module.exports = {
     signupValidation,
     createSpaceValidation,
     updateSpaceValidation,
-    joinSpaceValidation
+    spaceValidation
 }

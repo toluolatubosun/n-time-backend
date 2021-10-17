@@ -1,9 +1,27 @@
 const router = require('express').Router()
 const verifyUser = require('../utils/verifyUser')
-const { createSpaceValidation, updateSpaceValidation, joinSpaceValidation } = require('../utils/validation')
+const { createSpaceValidation, updateSpaceValidation, spaceValidation } = require('../utils/validation')
 const uniqueGenerator = require('../utils/uniqueGenerator')
 const Space = require('../model/Space')
 const Member = require('../model/Member')
+
+// Get particular space
+router.post('/', verifyUser, async (req, res) => {
+    // Validate Input
+    const { error } = spaceValidation(req.body)
+    if( error ) return res.status(400).json({ error: true, path: error.details[0].path[0], message: error.details[0].message })
+    
+    // Check if space exists
+    var exists = await Space.findOne({ spaceCode: req.body.spaceCode })
+    if( !exists ) return res.status(400).json({ error: true, path: "space", message: "This space does not exist" })
+
+    // Check if user is in the space
+    var exists = await Member.findOne({ spaceCode: req.body.spaceCode, userId: req.user._id })
+    if( !exists ) return res.status(400).json({ error: true, path: "user", message: "Access Denied. You are not in this space" })
+
+    // Return Space Data
+    res.json({success: true, data: exists})
+})
 
 router.post('/create-space', verifyUser, async (req, res) => {
     // Validate input
@@ -45,12 +63,12 @@ router.post('/update-space', verifyUser, async (req, res) => {
     if( error ) return res.status(400).json({ error: true, path: error.details[0].path[0], message: error.details[0].message })
      
     // Check if space exists
-    const exists = await Space.findOne({ spaceCode: req.body.spaceCode })
+    var exists = await Space.findOne({ spaceCode: req.body.spaceCode })
     if( !exists ) return res.status(400).json({ error: true, path: "space", message: "This space does not exist" })
 
     // Check if user is in the space
-    const existsM = await Member.findOne({ spaceCode: req.body.spaceCode, userId: req.user._id })
-    if( !existsM ) return res.status(400).json({ error: true, path: "user", message: "Access Denied. You are not in this space" })
+    var exists = await Member.findOne({ spaceCode: req.body.spaceCode, userId: req.user._id })
+    if( !exists ) return res.status(400).json({ error: true, path: "user", message: "Access Denied. You are not in this space" })
 
     // Update in database
     try{
@@ -65,11 +83,15 @@ router.post('/update-space', verifyUser, async (req, res) => {
 
 router.post('/join-space', verifyUser, async (req, res) => {
     // Validate input
-    const { error } = joinSpaceValidation(req.body)
+    const { error } = spaceValidation(req.body)
     if( error ) return res.status(400).json({ error: true, path: error.details[0].path[0], message: error.details[0].message })
-     
+    
+    // Check if space exists
+    var exists = await Space.findOne({ spaceCode: req.body.spaceCode })
+    if( !exists ) return res.status(400).json({ error: true, path: "space", message: "This space does not exist" })
+
     // Check if user is already in the space
-    const exists = await Member.findOne({ spaceCode: req.body.spaceCode, userId: req.user._id })
+    var exists = await Member.findOne({ spaceCode: req.body.spaceCode, userId: req.user._id })
     if( exists ) return res.status(400).json({ error: true, path: "user", message: "You are already in this space" })
 
     // Add user to the space
