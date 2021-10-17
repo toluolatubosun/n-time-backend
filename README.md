@@ -13,4 +13,6 @@ If you use yarn, your wierd :)
 ```
 
 ### Future Additions
+- Delete Space 
+- Invalid route
 - A function the handle json responses

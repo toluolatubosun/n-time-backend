@@ -4,7 +4,6 @@ const memberSchema = new mongoose.Schema({
     spaceCode: {
         type: String,
         length: 8,
-        unique: true,
         required: true
     },
     userId: {
