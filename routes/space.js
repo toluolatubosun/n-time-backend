@@ -1,9 +1,9 @@
 const router = require('express').Router()
-const verifyUser = require('../utils/verifyUser')
-const { createSpaceValidation, updateSpaceValidation, spaceValidation } = require('../utils/validation')
-const uniqueGenerator = require('../utils/uniqueGenerator')
 const Space = require('../model/Space')
 const Member = require('../model/Member')
+const verifyUser = require('../middleware/verifyUser')
+const { createSpaceValidation, updateSpaceValidation, spaceValidation } = require('../utils/validation')
+const uniqueGenerator = require('../utils/uniqueGenerator')
 
 // Get particular space
 router.post('/', verifyUser, async (req, res) => {

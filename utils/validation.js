@@ -69,7 +69,7 @@ const updateSpaceValidation = (data) => {
     return schema.validate(data)
 }
 
-// Join Space Validation
+// Join / Space Data Validation
 const spaceValidation = (data) => {
     const schema = Joi.object({
         spaceCode: Joi.string()
