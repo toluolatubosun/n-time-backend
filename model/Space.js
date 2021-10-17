@@ -1,0 +1,33 @@
+const mongoose = require('mongoose')
+
+const spaceSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        min: 6,
+        max: 50,
+        required: true
+    },
+    spaceCode: {
+        type: String,
+        length: 8,
+        unique: true,
+        required: true
+    },
+    venue: {
+        type: String,
+        min: 6,
+        max: 150,
+        required: true
+    },
+    state: {
+        type: Number,
+        length: 1,
+        default: 0
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
+})
+
+module.exports = mongoose.model('Space', spaceSchema)

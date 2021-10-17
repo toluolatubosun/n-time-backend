@@ -17,5 +17,5 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology
 app.use(express.json())
 
 // Route Middleware
-app.use('/api/user', authRoutes)
+app.use('/api/auth', authRoutes)
 app.use('/api/space', spaceRoutes)

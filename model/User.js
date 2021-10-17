@@ -5,20 +5,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         min: 6,
-        max: 60
+        max: 70
     },
     email: {
         type: String,
         required: true,
         unique: [true, "Email is already registered"],
         min: 6,
-        max: 60,
+        max: 70,
     }, 
     password: {
         type: String,
         required: true,
-        min: 6,
-        max: 1024,
     },
     date: {
         type: Date,
