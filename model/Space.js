@@ -13,6 +13,10 @@ const spaceSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
+    memberCount: {
+        type: Number,
+        default: 0,
+    },
     venue: {
         type: String,
         min: 6,

@@ -10,7 +10,7 @@ const memberSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // Role of 1 = Creator, 0 = Regular Member
+    // Role of 1 = Admin, 0 = Regular Member
     role: {
         type: Number,
         length: 1,
