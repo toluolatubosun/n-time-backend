@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 // Import routes
 const authRoutes = require('./routes/auth')
 const spaceRoutes = require('./routes/space')
+const userRoutes = require('./routes/user')
 
 const app = express()
 
@@ -19,3 +20,9 @@ app.use(express.json())
 // Route Middleware
 app.use('/api/auth', authRoutes)
 app.use('/api/space', spaceRoutes)
+app.use('/api/user', userRoutes)
+
+// 404 Route
+app.use('*', (req, res) => {
+    res.status(404).json({ error: true, path: "route", message: "Invalid Route"})
+})

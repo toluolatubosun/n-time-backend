@@ -1,4 +1,4 @@
-# N Time - Backend - Node.js
+# N Time - Backend - Node.js - Vanilla JS
 
 ## Setup
 
@@ -14,5 +14,4 @@ If you use yarn, your wierd :)
 
 ### Future Additions
 - Delete Space 
-- Invalid route
 - A function the handle json responses

@@ -108,17 +108,4 @@ router.post('/join-space', verifyUser, async (req, res) => {
     }
 })
 
-router.post('/my-spaces', verifyUser, async (req, res) => {
-    // Get users spaces
-    const member = await Member.find({ userId: req.user._id })
-    var data = new Array()
-    
-    for(let i = 0; i < member.length; i++){
-        let space = await Space.findOne({ spaceCode: member[i].spaceCode })
-        data.push({ space, member: member[i] })
-    }
-
-    res.json({ success: true, data })
-})
-
 module.exports = router
