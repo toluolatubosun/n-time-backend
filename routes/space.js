@@ -36,6 +36,7 @@ router.post('/create-space', verifyUser, async (req, res) => {
         name: req.body.name,
         spaceCode: spaceCode,
         venue: req.body.venue,
+        startDate: req.body.startDate,
         memberCount: 1
     })
 

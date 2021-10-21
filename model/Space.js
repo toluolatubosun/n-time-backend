@@ -23,6 +23,11 @@ const spaceSchema = new mongoose.Schema({
         max: 150,
         required: true
     },
+    startDate: {
+        type: Date,
+        required: true
+    },
+    // 0 - Not Started, 1 - Started, 2 - Cancelled
     state: {
         type: Number,
         length: 1,

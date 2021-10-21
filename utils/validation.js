@@ -41,6 +41,8 @@ const createSpaceValidation = (data) => {
             .min(6)
             .max(50)
             .required(),
+        startDate: Joi.string()
+            .required(),
         venue: Joi.string()
             .min(6)
             .max(150)
@@ -62,6 +64,8 @@ const updateSpaceValidation = (data) => {
         venue: Joi.string()
             .min(6)
             .max(150)
+            .required(),
+        startDate: Joi.string()
             .required(),
         state: Joi.number()
             .required()
