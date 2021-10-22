@@ -23,7 +23,7 @@ const spaceSchema = new mongoose.Schema({
         max: 150,
         required: true
     },
-    startDate: {
+    startDateTime: {
         type: Date,
         required: true
     },
