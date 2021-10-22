@@ -28,7 +28,10 @@ router.post('/sign-up', async (req, res) => {
     // Save user to the database
     try{
         const savedUser = await user.save()
-        res.json({success: true, data: savedUser})
+
+        // Create and assign token
+        const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, { expiresIn: '30 days' })
+        res.header('auth-token', token).json({success: true, data: savedUser, token: token })
     }catch(err){
         res.status(400).json({error: true, path: "db", message:"Database Error", ...err})
     }
